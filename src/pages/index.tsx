@@ -1,0 +1,9 @@
+export { default as HomePage } from "./home/home";
+export { default as Institute } from "./institute/institute";
+export { default as Student } from "./student/student";
+export { default as Teacher } from "./teacher/teacher";
+export { default as ClassRoom } from "./classroom/classroom";
+export { default as Center } from "./center/center";
+export { default as Lesson } from "./lesson/lesson";
+export { default as Exercise } from "./exercise/exercise";
+export { default as Archived } from "./exercise/archived";
