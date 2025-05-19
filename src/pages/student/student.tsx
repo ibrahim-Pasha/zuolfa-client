@@ -8,6 +8,7 @@ import DataGrid, {
 } from "devextreme-react/data-grid";
 import { ClassRoomService, StudentService } from "../../services";
 import { ClassRoom, Student } from "../../models";
+import { toast } from "react-toastify";
 
 export default function () {
   const [students, setStudents] = useState<Student[]>([]);
@@ -23,13 +24,16 @@ export default function () {
   }, []);
   const onStudentInserted = (e) => {
     StudentService.insert(e.data);
+    toast.success("Action completed successfully");
   };
   const onStudentUpdated = (e) => {
     StudentService.modify(e.data.id, e.data);
+    toast.success("Action completed successfully");
   };
 
   const onStudentRemoved = (e) => {
     StudentService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
 
   return (

@@ -13,7 +13,6 @@ import { InstituteService } from "../../services";
 import { toast } from "react-toastify";
 
 const DetailTemplate = (props: DataGridTypes.MasterDetailTemplateData) => {
-  props.data.data;
   const [lessons] = useState<Lesson[]>(
     props.data.data.lessons != null ? props.data.data.lessons : []
   );
@@ -29,14 +28,16 @@ const DetailTemplate = (props: DataGridTypes.MasterDetailTemplateData) => {
   });
 
   const onInstituteSave = () => {
-    if (lessons && centers && lessons.length > 4 && centers.length > 0) {
-      props.data.data.name;
-      insertedInstitute.name = props.data.data.name;
-      insertedInstitute.centers = centers;
-      insertedInstitute.lessons = lessons;
-      InstituteService.insert(insertedInstitute);
+    if (lessons && centers && lessons.length > 4) {
+      if (centers.length > 0) {
+        insertedInstitute.name = props.data.data.name;
+        insertedInstitute.centers = centers;
+        insertedInstitute.lessons = lessons;
+        InstituteService.insert(insertedInstitute);
+        toast.success("Action completed successfully");
+      } else toast.error("Total Count Of centers must be more than 0");
     } else {
-      toast.error("Total Count Of Lessons must be more than 4.");
+      toast.error("Total Count Of Lessons must be more than 4");
     }
   };
 
@@ -44,15 +45,12 @@ const DetailTemplate = (props: DataGridTypes.MasterDetailTemplateData) => {
     e.data.instituteId = instituteId;
   };
 
-  centers;
   const [isSaveActive, setIsSaveActive] = useState(false);
 
   useEffect(() => {
     const checkInstituteExists = async () => {
       const institute = await InstituteService.getById(instituteId);
       setIsSaveActive(institute !== "");
-      typeof institute;
-      institute !== null && institute !== undefined;
     };
 
     checkInstituteExists();

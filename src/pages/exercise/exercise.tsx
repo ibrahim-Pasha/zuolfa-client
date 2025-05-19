@@ -10,6 +10,7 @@ import DataGrid, {
 import { ExerciseService, LessonService } from "../../services";
 import { Exercise, Lesson } from "../../models";
 import ExerciseQuestionsDetailTemplate from "./exercise-questions-detail-template";
+import { toast } from "react-toastify";
 
 export default function () {
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -25,13 +26,16 @@ export default function () {
   }, []);
   const onExerciseInserted = (e) => {
     ExerciseService.insert(e.data);
+    toast.success("Action completed successfully");
   };
   const onExerciseUpdated = (e) => {
     ExerciseService.modify(e.data.id, e.data);
+    toast.success("Action completed successfully");
   };
 
   const onExerciseRemoved = (e) => {
     ExerciseService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
   const archiveButtonClick = async (e) => {
     const exerciseId = e.row.data.id;
@@ -42,7 +46,7 @@ export default function () {
     await ExerciseService.modify(clickedExercise.id, clickedExercise);
     const updatedExercises = exercises.filter((ex) => ex.id !== exerciseId);
     setExercises(updatedExercises);
-    e.row.data;
+    toast.success("Action completed successfully");
   };
   return (
     <React.Fragment>

@@ -3,6 +3,7 @@ import "./teacher.scss";
 import DataGrid, { Column, Editing } from "devextreme-react/data-grid";
 import { TeacherService } from "../../services";
 import { Teacher } from "../../models";
+import { toast } from "react-toastify";
 
 export default function () {
   const [teachers, serTeachers] = useState<Teacher[]>([]);
@@ -14,13 +15,16 @@ export default function () {
   }, []);
   const onTeacherInserted = (e) => {
     TeacherService.insert(e.data);
+    toast.success("Action completed successfully");
   };
   const onTeacherUpdated = (e) => {
     TeacherService.modify(e.data.id, e.data);
+    toast.success("Action completed successfully");
   };
 
   const onTeacherRemoved = (e) => {
     TeacherService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
 
   return (

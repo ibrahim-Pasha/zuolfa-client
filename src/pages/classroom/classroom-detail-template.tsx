@@ -9,6 +9,7 @@ import {
 import Button from "devextreme-react/cjs/button";
 import { Student } from "../../models";
 import { StudentService } from "../../services";
+import { toast } from "react-toastify";
 
 const ClassroomDetailTemplate = (
   props: DataGridTypes.MasterDetailTemplateData
@@ -24,10 +25,13 @@ const ClassroomDetailTemplate = (
     const classroomId = props.data.data.id;
     inertedStudents.forEach((l) => (l.classroomId = classroomId));
     StudentService.insertStudents(inertedStudents);
+    toast.success("Action completed successfully");
+
     setInertedStudents([]);
   };
   const onStudentRemoved = (e) => {
     StudentService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
   return (
     <React.Fragment>

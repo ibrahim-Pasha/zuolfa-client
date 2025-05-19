@@ -13,6 +13,7 @@ import {
   Lookup,
   Button,
 } from "devextreme-react/data-grid";
+import { toast } from "react-toastify";
 
 export default function () {
   const [archivedExercises, setArchivedExercises] = useState<Exercise[]>([]);
@@ -22,6 +23,7 @@ export default function () {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const onExerciseRemoved = (e) => {
     ExerciseService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
 
   const unarchiveExerciseButtonClick = async (e) => {
@@ -35,7 +37,7 @@ export default function () {
       (ex) => ex.id !== exerciseId
     );
     setArchivedExercises(updatedExercises);
-    e.row.data;
+    toast.success("Action completed successfully");
   };
   const unarchiveQuestionButtonClick = async (e) => {
     const exerciseId = e.row.data.id;
@@ -48,6 +50,7 @@ export default function () {
       (ex) => ex.id !== exerciseId
     );
     setArchivedQuestions(updatedExercises);
+    toast.success("Action completed successfully");
   };
   useEffect(() => {
     const archivedExercises$ = ExerciseService.getArchived();

@@ -10,6 +10,7 @@ import {
 import Button from "devextreme-react/cjs/button";
 import { ExerciseQuestion } from "../../models";
 import { ExerciseQuestionService } from "../../services";
+import { toast } from "react-toastify";
 
 const ExerciseQuestionsDetailTemplate = (
   props: DataGridTypes.MasterDetailTemplateData
@@ -27,13 +28,17 @@ const ExerciseQuestionsDetailTemplate = (
     const exerciseId = props.data.data.id;
     insertedQuestions.forEach((l) => (l.exerciseId = exerciseId));
     ExerciseQuestionService.insertExerciseQuestions(insertedQuestions);
+    toast.success("Action completed successfully");
+
     setInsertedQuestions([]);
   };
   const onExerciseQuestionRemoved = (e) => {
     ExerciseQuestionService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
   const onExerciseQuestionUpdated = (e) => {
     ExerciseQuestionService.modify(e.data.id, e.data);
+    toast.success("Action completed successfully");
   };
   const archiveButtonClick = async (e) => {
     const exerciseId = e.row.data.id;
@@ -46,7 +51,7 @@ const ExerciseQuestionsDetailTemplate = (
       (ex) => ex.id !== exerciseId
     );
     setExercisequestions(updatedExercises);
-    e.row.data;
+    toast.success("Action completed successfully");
   };
   return (
     <React.Fragment>

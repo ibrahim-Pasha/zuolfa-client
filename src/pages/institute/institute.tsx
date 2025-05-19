@@ -9,6 +9,7 @@ import DataGrid, {
 import { InstituteService } from "../../services";
 import { Institute } from "../../models";
 import DetailTemplate from "./institute-detail-template";
+import { toast } from "react-toastify";
 
 export default function () {
   const [institutes, setInstitutes] = useState<Institute[]>([]);
@@ -20,10 +21,12 @@ export default function () {
   }, []);
   const onInstituteUpdated = (e) => {
     InstituteService.modify(e.data.id, e.data);
+    toast.success("Action completed successfully");
   };
 
   const onInstituteRemoved = (e) => {
     InstituteService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
 
   return (

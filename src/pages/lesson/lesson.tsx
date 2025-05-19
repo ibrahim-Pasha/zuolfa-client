@@ -8,6 +8,7 @@ import DataGrid, {
 } from "devextreme-react/data-grid";
 import { InstituteService, LessonService } from "../../services";
 import { Institute, Lesson } from "../../models";
+import { toast } from "react-toastify";
 
 export default function () {
   const [lessons, setLessons] = useState<Lesson[]>([]);
@@ -23,13 +24,16 @@ export default function () {
   }, []);
   const onLessonInserted = (e) => {
     LessonService.insert(e.data);
+    toast.success("Action completed successfully");
   };
   const onLessonUpdated = (e) => {
     LessonService.modify(e.data.id, e.data);
+    toast.success("Action completed successfully");
   };
 
   const onLessonRemoved = (e) => {
     LessonService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
 
   return (

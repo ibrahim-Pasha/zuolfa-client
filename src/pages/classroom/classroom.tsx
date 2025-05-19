@@ -14,6 +14,7 @@ import {
 } from "../../services";
 import { Center, ClassRoom, Teacher } from "../../models";
 import ClassroomDetailTemplate from "./classroom-detail-template";
+import { toast } from "react-toastify";
 
 export default function () {
   const [classrooms, setClassRooms] = useState<ClassRoom[]>([]);
@@ -33,13 +34,16 @@ export default function () {
   }, []);
   const onClassroomInserted = (e) => {
     ClassRoomService.insert(e.data);
+    toast.success("Action completed successfully");
   };
   const onClassroomUpdated = (e) => {
     ClassRoomService.modify(e.data.id, e.data);
+    toast.success("Action completed successfully");
   };
 
   const onClassroomRemoved = (e) => {
     ClassRoomService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
 
   return (

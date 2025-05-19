@@ -8,6 +8,7 @@ import DataGrid, {
 } from "devextreme-react/data-grid";
 import { CenterService, InstituteService } from "../../services";
 import { Center, Institute } from "../../models";
+import { toast } from "react-toastify";
 
 export default function () {
   const [centers, setCenters] = useState<Center[]>([]);
@@ -22,13 +23,16 @@ export default function () {
   }, []);
   const onCenterInserted = (e) => {
     CenterService.insert(e.data);
+    toast.success("Action completed successfully");
   };
   const onCenterUpdated = (e) => {
     CenterService.modify(e.data.id, e.data);
+    toast.success("Action completed successfully");
   };
 
   const onCenterRemoved = (e) => {
     CenterService.remove(e.data.id);
+    toast.success("Action completed successfully");
   };
 
   return (
